@@ -57,16 +57,28 @@ int isprintable(char c)
 
 int checkInt(std::string entry)
 {
-    long long_val;
+    for (size_t i = 0; i < entry.length(); i++) {
+        if (i == 0 && (entry[i] == '-' || entry[i] == '+')) continue;
+        if (!isdigit(entry[i])) return 0;
+    }
 
+    double double_val;
     std::stringstream ss(entry);
-    ss >> long_val;
+    ss >> double_val;
+    
     if (!ss.fail() && ss.eof())
     {
-        if (long_val > std::numeric_limits<int>::max() || long_val < std::numeric_limits<int>::min())
-            return 0; // Overflowed int, probably meant to be a float/double
+        if (double_val > std::numeric_limits<int>::max() || double_val < std::numeric_limits<int>::min())
+        {
+            std::cout << "char: impossible" << std::endl;
+            std::cout << "int: impossible" << std::endl;
+            
+            std::cout << "float: " << static_cast<float>(double_val) << "f" << std::endl; 
+            std::cout << "double: " << double_val << std::endl;
+            return 1;
+        }
 
-        int int_val = static_cast<int>(long_val);
+        int int_val = static_cast<int>(double_val);
         if (int_val >= 0 && int_val <= 127 && isprintable(static_cast<char>(int_val)))
             std::cout << "char: '" << static_cast<char>(int_val) << "'" << std::endl;
         else if (int_val >= 0 && int_val <= 127)
@@ -116,7 +128,7 @@ int checkFloat(std::string entry)
                 std::cout << ".0";
             std::cout << "f" << std::endl;
 
-            std::cout << "double: " << static_cast<double>(float_val);
+            std::cout << "double: " << set<< static_cast<double>(float_val);
             if (float_val > -1000000 && float_val < 1000000 && float_val == static_cast<int>(float_val)) 
                 std::cout << ".0";
             std::cout << std::endl;
