@@ -1,0 +1,24 @@
+1- dynamic cast
+dynamic casting i the only cast that is checked at runtime.
+why?
+=> other casts rely on static inforation, the compiler cares only about informations 
+	it has at compile time
+and as I know , a base class pointer can point to any other derived class, right!
+so its impossibl for dynamic cast to happen at compile time , otherwise an errorwill erise 
+=> we use the dynamic const , if we weren't sure , cs a type-check gonna be used at runtime 
+other casts can't be executed at runtime other wise only to caset int or float will 
+involve this typecheck which gonna take time.
+
+=> as the compiler doesn't know what a base class point to , if we used dynamic cast
+for sure at runtime it will be necessary to have vtable , cz this one hold infos about the obj 
+the pointer points to , this will be visible onlyat runtime 
+
+=> RTTi(RUN-TIME type informations):
+this allows the prog to idetify the type of the obj at runtime thnaks to the vtable
+(this one contains an entry that points to type_info obj) its usually vtable_index - 1 
+(for that a base class should and must have a at least 1 virtual function)
+
+when the compiler checks the type_obj, it looks whether that type is derived class or a class derived from 
+that derived class.
+||
+  ==> if yes it returns the adjusted pointer , if no,it returns nullptr.
